@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Register from "./Register";
 import Login from "./Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import About from "./About";
+import Register from "./Register";
+import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
-import "./App.css";
+import { FileUploader } from "./Fileupload";
 
 function App() {
-  const [currentForm, setCurrentForm] = useState("login");
-
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
-
   return (
     <div className="App">
-      <Navbar />
-      {currentForm === "login" ? (
-        <Login onFormSwitch={toggleForm} />
-      ) : (
-        <Register onFormSwitch={toggleForm} />
-      )}
+      {/* Everything that need to be routed, must be placed inside opening and closing router tags. */}
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/useraccount" element={<FileUploader />} />
+        </Routes>
+      </Router>
     </div>
-
-    // <Router>
-    //   <Switch>
-    //     <Route exact path="./Register" component={Register} />
-    //     <Route path="./Login" component={Login} />
-    //   </Switch>
-    // </Router>
   );
 }
 

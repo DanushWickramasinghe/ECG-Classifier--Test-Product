@@ -1,3 +1,5 @@
+import "./App.css";
+import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import {
   faCheck,
@@ -242,9 +244,11 @@ const Register = (props) => {
         <p className="sign-in-link">
           Already registered?
           <br />
-          <a className="link-btn" href="" onClick={props.onFormSwitch}>
-            Log In
-          </a>
+          <span className="line">
+            <Link to="/login" className="link-btn">
+              Log In
+            </Link>
+          </span>
         </p>
       </form>
     </section>

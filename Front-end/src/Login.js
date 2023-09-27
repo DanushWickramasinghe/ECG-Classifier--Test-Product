@@ -1,6 +1,8 @@
+import "./App.css";
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const Login = (props) => {
+const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
 
@@ -75,9 +77,9 @@ const Login = (props) => {
           Did not register yet?
           <br />
           <span className="line">
-            <a className="link-btn" href="#" onClick={props.onFormSwitch}>
+            <Link to="/register" className="link-btn">
               Register
-            </a>
+            </Link>
           </span>
         </p>
       </form>
