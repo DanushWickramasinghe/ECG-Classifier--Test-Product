@@ -17,6 +17,12 @@ export const FileUploader = ({ handleFiles }) => {
     handleFiles(fileUploaded, fileIndex);
   };
 
+  const handle_Submit = async (e) => {
+    e.preventDefault();
+    console.log("Two files submitted.");
+  };
+  // define what should back-end do here when the button is clicked
+
   return (
     <div className="buttons">
       <button
@@ -33,16 +39,27 @@ export const FileUploader = ({ handleFiles }) => {
       </button>
       <input
         type="file"
+        accept=".mat"
+        multiple="false"
+        required
         onChange={(event) => handleChange(event, 1)}
         ref={hiddenFileInput1}
         style={{ display: "none" }}
       />
       <input
         type="file"
+        accept=".hea"
+        multiple="false"
+        required
         onChange={(event) => handleChange(event, 2)}
         ref={hiddenFileInput2}
         style={{ display: "none" }}
       />
+
+      <button className="files-submit-btn" onClick={handle_Submit}>
+        {" "}
+        Submit Files
+      </button>
     </div>
   );
 };

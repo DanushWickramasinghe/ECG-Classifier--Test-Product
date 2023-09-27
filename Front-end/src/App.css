@@ -180,3 +180,14 @@
     border-right: 10px;
     background-color: rgba(61, 54, 73, 0.4);
 }
+
+.files-submit-btn{
+    padding:10px;
+    border: 2rem;
+    border-radius: 10px;
+    background-color: #000000;
+    font-variant: small-caps;
+    font-size: x-large;
+    color: white;
+    cursor: pointer;
+}
