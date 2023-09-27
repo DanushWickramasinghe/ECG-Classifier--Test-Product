@@ -1,31 +1,50 @@
 import { useRef } from "react";
 import "./App.css";
-export const FileUploader = ({ handleFile }) => {
-  // Create a reference to the hidden file input element
-  const hiddenFileInput = useRef(null);
 
-  // Programatically click the hidden file input element
+export const FileUploader = ({ handleFiles }) => {
+  // Create references to the hidden file input elements
+  const hiddenFileInput1 = useRef(null);
+  const hiddenFileInput2 = useRef(null);
+
+  // Programmatically click the hidden file input element
   // when the Button component is clicked
-  const handleClick = (event) => {
-    hiddenFileInput.current.click();
+  const handleClick = (inputRef) => () => {
+    inputRef.current.click();
   };
+
   // Call a function (passed as a prop from the parent component)
-  // to handle the user-selected file
-  const handleChange = (event) => {
+  // to handle the user-selected files
+  const handleChange = (event, fileIndex) => {
     const fileUploaded = event.target.files[0];
-    handleFile(fileUploaded);
+    handleFiles(fileUploaded, fileIndex);
   };
+
   return (
-    <>
-      <button className="file-upload-btn" onClick={handleClick}>
-        Upload a file
+    <div className="buttons">
+      <button
+        className="file-upload-btn"
+        onClick={handleClick(hiddenFileInput1)}
+      >
+        Upload your .mat file here
+      </button>
+      <button
+        className="file-upload-btn"
+        onClick={handleClick(hiddenFileInput2)}
+      >
+        Upload your header file here
       </button>
       <input
         type="file"
-        onChange={handleChange}
-        ref={hiddenFileInput}
-        style={{ display: "none" }} // Make the file input element invisible
+        onChange={(event) => handleChange(event, 1)}
+        ref={hiddenFileInput1}
+        style={{ display: "none" }}
       />
-    </>
+      <input
+        type="file"
+        onChange={(event) => handleChange(event, 2)}
+        ref={hiddenFileInput2}
+        style={{ display: "none" }}
+      />
+    </div>
   );
 };

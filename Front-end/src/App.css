@@ -137,17 +137,24 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: rgba(10, 12, 100,0.5); /* to be replaced with your custom design */
+    background: rgba(214, 215, 227, 0.5); /* to be replaced with your custom design */
     border: 200cap solid rgb(77, 7, 7);
-    border-style:dotted;
+    border-style:groove;
     border-radius: 10px; 
     cursor: pointer;
     font-size:xx-large;
     font-variant: small-caps;
-    min-height: 80px;
-    min-width: 200px;
+    padding: 20px; 
+    margin: 10px;
+    text-align: center;
   
-  .button-upload:focus {
+.button-upload:focus {
     outline-offset: 4px; 
   }
+}
+
+.buttons{
+    display:flex;
+    flex-direction: column;
+    justify-content: left;
 }
