@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Login from "./Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./Login";
 import About from "./About";
 import Register from "./Register";
 import Dashboard from "./Dashboard";

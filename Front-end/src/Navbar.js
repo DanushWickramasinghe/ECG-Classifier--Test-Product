@@ -1,7 +1,7 @@
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <a href="./Dashboard" className="dash-board">
+      <a href="./Dashboard" className="dashboard-btn">
         Dashboard
       </a>
       <ul>

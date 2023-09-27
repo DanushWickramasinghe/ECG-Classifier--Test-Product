@@ -70,7 +70,7 @@ const Register = (props) => {
   };
 
   return (
-    <section>
+    <section className="register-page">
       <p
         ref={errRef}
         className={errMsg ? "errmsg" : "offscreen"}
