@@ -1,6 +1,7 @@
 import "./App.css";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -22,17 +23,18 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //If button enabled with JS hack
-    // const v1 = USER_REGEX.test(user);
-    // const v2 = PWD_REGEX.test(pwd);
-
-    // Here we have to check with the database if there is such a matching username and a password.
-    // if (!v1 || !v2) {
-    //   setErrMsg("Invalid Entry");
-    //   return;
-    // }
-    // console.log(user, pwd);
-    // setSuccess(true);
+    console.log({ user, pwd });
+    axios
+      .post("http://localhost:4000/login", { user, pwd })
+      .then((response) => {
+        // Handle successful login
+        console.log("successful");
+      })
+      .catch((error) => {
+        // Handle login errors
+        // console.error("Error logging in:", error);
+        console.log("failed");
+      });
   };
 
   return (
@@ -72,7 +74,9 @@ const Login = () => {
           required
         />
 
-        <button className="submit-button">Log In</button>
+        <button className="submit-button" type="submit">
+          Log In
+        </button>
         <p className="sign-up-link">
           Did not register yet?
           <br />
