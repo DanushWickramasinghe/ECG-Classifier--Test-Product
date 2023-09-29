@@ -1,5 +1,5 @@
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import {
   faCheck,
@@ -7,6 +7,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_].{2,24}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -29,6 +30,8 @@ const Register = (props) => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     userRef.current.focus(); // Here we simply set the focus to User input.
@@ -68,6 +71,23 @@ const Register = (props) => {
     }
     console.log(user, pwd);
     setSuccess(true);
+    axios
+      .post("http://localhost:4000/createUser", { user, pwd })
+      .then((response) => {
+        console.log(response.data.status, response.data.message);
+        if (response.data.status) {
+          alert("New user account created, Please login.");
+          navigate("/login");
+        } else {
+          alert(response.data.message + " Please use a new Username.");
+          window.location.reload(false);
+          console.log("Page refreshed to enter new Reg. details.");
+        }
+      })
+      .catch((error) => {
+        // Handle registration errors
+        console.log("failed with ", error);
+      });
   };
 
   return (

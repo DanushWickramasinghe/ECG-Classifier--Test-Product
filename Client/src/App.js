@@ -15,10 +15,10 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
+          <Route path="/" element={<Dashboard />} />
           <Route exact path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Dashboard />} />
           <Route path="/useraccount" element={<FileUploader />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

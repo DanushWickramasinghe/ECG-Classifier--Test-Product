@@ -35,7 +35,7 @@ const Login = () => {
           response.data.data
         );
         if (response.data.status) {
-          navigate("/register");
+          navigate("/useraccount");
         } else {
           alert(response.data.message);
         }

@@ -42,8 +42,8 @@ app.use(express.json());
 //middleware to read req.body.<params>
 //CREATE USER
 app.post("/createUser", async (req, res) => {
-  const user = req.body.name;
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const user = req.body.user;
+  const hashedPassword = await bcrypt.hash(req.body.pwd, 10);
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = "SELECT * FROM userTable WHERE user = ?";
@@ -59,14 +59,14 @@ app.post("/createUser", async (req, res) => {
       if (result.length != 0) {
         connection.release();
         console.log("------> User already exists");
-        res.sendStatus(409);
+        res.json({ status: false, message: "User already exists" });
       } else {
         await connection.query(insert_query, (err, result) => {
           connection.release();
           if (err) throw err;
           console.log("--------> Created new User");
           console.log(result.insertId);
-          res.sendStatus(201);
+          res.json({ status: true, message: "Created a new User" });
         });
       }
     }); //end of connection.query()
