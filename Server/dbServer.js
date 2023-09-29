@@ -87,16 +87,18 @@ app.post("/login", (req, res) => {
       if (err) throw err;
       if (result.length == 0) {
         console.log("--------> User does not exist");
-        res.sendStatus(404);
+        res.json({ status: false, message: "user does not exist" });
       } else {
         const hashedPassword = result[0].password;
         //get the hashedPassword from result
         if (await bcrypt.compare(password, hashedPassword)) {
           console.log("---------> Login Successful");
-          res.sendStatus(200); //.send({ message: `${user} is logged in!` });
+          // res.sendStatus(200); //.send({ message: `${user} is logged in!` });
+          res.json({ status: true, data: { user: "login" } });
         } else {
           console.log("---------> Password Incorrect");
-          res.sendStatus(404); //.send({ message: "Password incorrect!" });
+          // res.sendStatus(404); //.send({ message: "Password incorrect!" });
+          res.json({ status: false, message: "password incorect" });
         }
       }
     });
